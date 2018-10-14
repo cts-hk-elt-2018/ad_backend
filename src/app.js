@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import socket from 'socket.io';
 import http from 'http';
+import passportManager from './config/passport';
 import router from './routes';
 
 
@@ -29,5 +30,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.use('/',router);
+
+app.use(passportManager.initialize());
 
 export {app, server};
