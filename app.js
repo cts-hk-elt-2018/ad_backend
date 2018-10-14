@@ -12,7 +12,6 @@ require('dotenv-safe').config();
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-// var io = require('socket.io').listen(server)
 
 
 // Middleware
@@ -32,9 +31,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// io.on('connection', function(socket) {
-//     console.log('a user connected');
-// });
 
 module.exports = {app: app, server: server};
