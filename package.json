@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "yarn build",
     "start": "node .dist/bin/www",
-    "dev": "nodemon src/bin/www --exec \"node -r dotenv/config -r babel-register\"",
+    "dev": "nodemon src/bin/www --exec \"node -r dotenv-safe/config -r babel-register\"",
     "clean": "rimraf dist",
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
   },

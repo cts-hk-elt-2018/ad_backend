@@ -5,11 +5,8 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import socket from 'socket.io';
 import http from 'http';
-import dotenv from 'dotenv-safe';
-
 import router from './routes';
 
-dotenv.config();
 
 const app = express();
 

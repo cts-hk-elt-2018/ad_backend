@@ -6,7 +6,7 @@ class passportManager {
   initialize() {
     var opts = {
       jwtFromRequest : ExtractJwt.fromAuthHeaderWithScheme("jwt"),
-      secretOrKey : config.secret
+      secretOrKey : process.env.JWT_SECRET_KEY
     };
     passport.use(new Strategy(opts, (jwt_payload, done) => {
       models.User.findById(jwt_payload.id).then(user => {
