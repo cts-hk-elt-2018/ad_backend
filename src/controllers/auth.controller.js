@@ -39,7 +39,7 @@ class Auth {
           switch (result) {
             case securePassword.VALID:
               // if user is found and password is right create a token
-              var token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{ expiresIn: '7d' });
+              var token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{ expiresIn: '90d' });
               // return the information including token as JSON
               res.json({success: true, token: 'JWT ' + token});
               break;
