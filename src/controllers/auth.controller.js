@@ -9,7 +9,8 @@ class Auth {
     if (!req.body.username || !req.body.password) {
       res.json({success: false, msg: 'Please pass username and password.'});
     } else {
-      pwd.hash(req.body.password, (err, hash) => {
+      var password = Buffer.from(req.body.password);
+      pwd.hash(password, (err, hash) => {
         if (err) throw err;
         models.User.create({
           username: req.body.username,
@@ -22,7 +23,7 @@ class Auth {
       });
     }
   }
-  signIn(req, res) {    
+  signIn(req, res) {
     models.User.findOne({
       where: {
         username: req.body.username
@@ -32,7 +33,8 @@ class Auth {
         res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
       } else {
         // check if password matches
-        pwd.verify(req.body.password, user.password, (err, result) => {
+        var password = Buffer.from(req.body.password);
+        pwd.verify(password, user.password, (err, result) => {
           if (err) throw err;
           switch (result) {
             case securePassword.VALID:
@@ -45,7 +47,6 @@ class Auth {
               res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
               break;
           }
-
         });
       }
     }).catch(err => {
