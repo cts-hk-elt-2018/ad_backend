@@ -1,6 +1,11 @@
 {
   "name": "ad-backend",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": {
+    "name" : "Dicky Ho", 
+    "email" : "me@ckho.info", 
+    "url" : "https://www.ckho.info/"
+  },
   "private": true,
   "scripts": {
     "prestart": "yarn build",
