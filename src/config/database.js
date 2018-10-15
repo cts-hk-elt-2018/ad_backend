@@ -1,10 +1,9 @@
+import path from 'path';
+
 module.exports = {
   development: {
-    username: 'database_dev',
-    password: 'database_dev',
-    database: 'database_dev',
-    host: '127.0.0.1',
-    dialect: 'mysql',
+    storage: path.join(__dirname, '..', '..', 'data', 'dev-db.sqlite3'),
+    dialect: 'sqlite',
     operatorsAliases: false
   },
   test: {

@@ -31,6 +31,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "nodemon": "^1.18.4",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sqlite3": "^4.0.2"
   }
 }
