@@ -84,14 +84,14 @@ class CheckinController {
                 UserId: user.id,
                 eventId: req.params.eventId
               }).then(user => {
-                return res.json({success: true, msg: 'User checked in.'});
+                return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName});
               }).catch(err => {
                 return res.json({success: false, msg: 'Error'});
               });
             } else {
-              return res.json({success: false, msg: 'User already checked in.'});
+              return res.json({success: true, msg: 'User already checked in.', username: user.username, name: user.lastName + ', ' + user.firstName});
             }
-          });        
+          });
         }
       });
     } else {
@@ -116,9 +116,9 @@ class CheckinController {
             }
           }).then(checkin => {
             if (!checkin) {
-              return res.json({success: false, msg: 'Checked in not existed.'});
+              return res.json({success: false, msg: 'Checked in not existed.', username: user.username, name: user.lastName + ', ' + user.firstName});
             } else {
-              return res.json({success: true, msg: 'Checkin deleted.'});
+              return res.json({success: true, msg: 'Checkin deleted.', username: user.username, name: user.lastName + ', ' + user.firstName});
             }
           });        
         }
