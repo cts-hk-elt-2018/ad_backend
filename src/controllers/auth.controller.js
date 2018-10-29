@@ -34,7 +34,8 @@ class Auth {
       } else {
         // check if password matches
         var password = Buffer.from(req.body.password);
-        pwd.verify(password, user.password, (err, result) => {
+        var userPassword = Buffer.from(user.password);
+        pwd.verify(password, userPassword, (err, result) => {
           if (err) throw err;
           switch (result) {
             case securePassword.VALID:
