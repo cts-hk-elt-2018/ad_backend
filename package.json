@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "prestart": "npm run build",
-    "start": "node .dist/bin/www",
-    "dev": "nodemon src/bin/www --exec \"node -r dotenv-safe/config -r babel-register\"",
+    "start": "node dist/bin/www.js",
+    "dev": "nodemon src/bin/www.js --exec \"node -r dotenv-safe/config -r babel-register\"",
     "clean": "rimraf dist",
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
   },
