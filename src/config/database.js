@@ -20,6 +20,9 @@ module.exports = {
     database: process.env.PROD_DB_NAME,
     host: process.env.PROD_DB_HOSTNAME,
     dialect: 'mysql',
+    dialectOptions: {
+        ssl:'Amazon RDS'
+    },
     operatorsAliases: false
   }
 };
