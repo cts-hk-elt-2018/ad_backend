@@ -8,7 +8,7 @@
   },
   "private": true,
   "scripts": {
-    "prestart": "yarn build",
+    "prestart": "npn run build",
     "start": "node .dist/bin/www",
     "dev": "nodemon src/bin/www --exec \"node -r dotenv-safe/config -r babel-register\"",
     "clean": "rimraf dist",
