@@ -15,7 +15,7 @@ import {app, server} from '../app';
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(process.env.PORT || '8081');
 app.set('port', port);
 
 /**
