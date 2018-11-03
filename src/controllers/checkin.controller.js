@@ -2,7 +2,7 @@ import models from '../models';
 
 class CheckinController {
   async index(req, res) {
-    if (req.user && req.user.username && (req.user.role == 2)) {  
+    if (req.user && req.user.username && (req.user.role >= 2)) {  
       models.Checkin.findAndCountAll({
         attributes: ['createdAt'],
         include: [{
@@ -21,7 +21,7 @@ class CheckinController {
   }
 
   async count(req, res) {
-    if (req.user && req.user.username && (req.user.role == 2)) {  
+    if (req.user && req.user.username && (req.user.role >= 2)) {  
       models.Checkin.count({
         where: {
           eventId: req.params.eventId
@@ -35,7 +35,7 @@ class CheckinController {
   }
 
   async show(req, res) {
-    if (req.user && req.user.username && (req.user.role == 2)) {
+    if (req.user && req.user.username && (req.user.role >= 2)) {
       models.User.findOne({
         where: {
           username: req.params.username
@@ -64,7 +64,7 @@ class CheckinController {
   }
 
   async create(req, res) {
-    if (req.user && req.user.username && (req.user.role == 2)) {  
+    if (req.user && req.user.username && (req.user.role >= 2)) {  
       models.User.findOne({
         where: {
           username: req.params.username
@@ -100,7 +100,7 @@ class CheckinController {
   }
 
   async remove(req, res) {
-    if (req.user && req.user.username && (req.user.role == 2)) {  
+    if (req.user && req.user.username && (req.user.role >= 2)) {  
       models.User.findOne({
         where: {
           username: req.params.username

@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    isWinner: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {});
   User.associate = (models) => {
