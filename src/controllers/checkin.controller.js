@@ -51,9 +51,9 @@ class CheckinController {
             }
           }).then(checkin => {
             if (!checkin) {
-              res.status(200).send({result: false});
+              return res.status(200).send({result: false});
             } else {
-              res.status(200).send({result: true});
+              return res.status(200).send({result: true});
             }
           });
         }
