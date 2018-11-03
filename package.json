@@ -2,9 +2,9 @@
   "name": "ad-backend",
   "version": "1.0.0",
   "author": {
-    "name" : "Dicky Ho", 
-    "email" : "me@ckho.info", 
-    "url" : "https://www.ckho.info/"
+    "name": "Dicky Ho",
+    "email": "me@ckho.info",
+    "url": "https://www.ckho.info/"
   },
   "private": true,
   "scripts": {
@@ -15,6 +15,9 @@
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "compression": "^1.7.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -26,14 +29,11 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "rimraf": "^2.6.2",
     "secure-password": "^3.1.0",
     "sequelize": "^4.39.0",
     "sequelize-cli": "^5.1.0",
-    "socket.io": "^2.1.1",
-    "rimraf": "^2.6.2",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
