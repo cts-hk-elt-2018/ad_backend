@@ -70,3 +70,6 @@ typings/
 !.elasticbeanstalk/*.global.yml
 
 .ebextensions/*
+
+# Frontend
+public/screen*
