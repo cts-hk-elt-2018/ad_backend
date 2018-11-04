@@ -25,9 +25,10 @@ class LuckyDrawController {
         if (!gift) {
           return res.status(404).send({success: false, msg: 'Gift not found.'});
         } else {
-          // TODO: 
-          // SHOW IT ON SCREEN THROUGH SOCKET.IO
-          //
+          //Screen Display
+          res.screen.emit('current_page', 'lucky_draw');
+          res.screen.emit('luckydraw_current_gift', gift);
+
           return res.status(200).send({result:true});
         }
       });
@@ -63,9 +64,11 @@ class LuckyDrawController {
               models.User.update({isWinner: 1}, {where: {id: winner.id}});
             });
 
-            // TODO: 
-            // SHOW IT ON SCREEN THROUGH SOCKET.IO
-            //
+            //Screen Display
+            res.screen.emit('current_page', 'lucky_draw');
+            res.screen.emit('luckydraw_current_gift', gift);
+            res.screen.emit('luckydraw_add_winners', winners);
+            
             return res.status(200).send({success: true, winners: winners});
           }); 
         }
@@ -86,24 +89,21 @@ class LuckyDrawController {
           return res.status(404).send({success: false, msg: 'Gift not found.'});
         } else {
           console.log("123");
-          console.log(req.body.removedWinners.length);
+          console.log(req.body.removedWinnersId.length);
           models.LuckyDrawWinner.update({
             removed: true
           },{
             where: {
               LuckyDrawGiftId: gift.id,
               UserId: {
-                [Op.in]: req.body.removedWinners
+                [Op.in]: req.body.removedWinnersId
               }
             }
           });
-
-          // TODO: 
-          // REMOVE EX-WINNERS FROM SCREEN THROUGH SOCKET.IO
-          //
+          
           models.User.findAll({
             order: models.sequelize.random(),
-            limit: req.body.removedWinners.length,
+            limit: req.body.removedWinnersId.length,
             where: {
               isWinner: false
             },
@@ -117,9 +117,13 @@ class LuckyDrawController {
               });
               models.User.update({isWinner: 1}, {where: {id: winner.id}});
             });
-            // TODO: 
-            // SHOW IT ON SCREEN THROUGH SOCKET.IO
-            //
+
+            //Screen Display
+            res.screen.emit('current_page', 'lucky_draw');
+            res.screen.emit('luckydraw_current_gift', gift);
+            res.screen.emit('luckydraw_remove_winners', req.body.removedWinnersId);
+            res.screen.emit('luckydraw_add_winners', winners);
+            
             return res.status(200).send({success: true, winners: winners});
           });
         }
