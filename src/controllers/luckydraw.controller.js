@@ -29,7 +29,7 @@ class LuckyDrawController {
           res.screen.emit('current_page', 'lucky_draw');
           res.screen.emit('luckydraw_current_gift', gift);
 
-          return res.status(200).send({result:true});
+          return res.status(200).send({success:true});
         }
       });
     } else {
