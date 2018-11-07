@@ -27,7 +27,10 @@ class LuckyDrawController {
         } else {
           //Screen Display
           res.screen.emit('current_page', 'lucky_draw');
+          models.Option.update({value: 'lucky_draw'}, {where: {key: 'currentPage'}});
+
           res.screen.emit('luckydraw_current_gift', gift);
+          res.screen.emit('luckydraw_empty_winners', null);
 
           return res.status(200).send({success:true});
         }
@@ -66,6 +69,8 @@ class LuckyDrawController {
 
             //Screen Display
             res.screen.emit('current_page', 'lucky_draw');
+            models.Option.update({value: 'lucky_draw'}, {where: {key: 'currentPage'}});
+
             res.screen.emit('luckydraw_current_gift', gift);
             res.screen.emit('luckydraw_add_winners', winners);
             
@@ -88,8 +93,6 @@ class LuckyDrawController {
         if (!gift) {
           return res.status(404).send({success: false, msg: 'Gift not found.'});
         } else {
-          console.log("123");
-          console.log(req.body.removedWinnersId.length);
           models.LuckyDrawWinner.update({
             removed: true
           },{
@@ -120,6 +123,8 @@ class LuckyDrawController {
 
             //Screen Display
             res.screen.emit('current_page', 'lucky_draw');
+            models.Option.update({value: 'lucky_draw'}, {where: {key: 'currentPage'}});
+
             res.screen.emit('luckydraw_current_gift', gift);
             res.screen.emit('luckydraw_remove_winners', req.body.removedWinnersId);
             res.screen.emit('luckydraw_add_winners', winners);
