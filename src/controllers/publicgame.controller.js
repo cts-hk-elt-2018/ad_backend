@@ -1,5 +1,5 @@
 import models from '../models';
-import s3 from '../congig/s3';
+import s3 from '../config/s3';
 import stream from 'stream';
 import moment from 'moment-timezone';
 import xss from 'xss';
