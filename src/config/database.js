@@ -1,10 +1,11 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   development: {
     storage: path.join(__dirname, '..', '..', 'data', 'dev-db.sqlite3'),
     dialect: 'sqlite',
-    operatorsAliases: false
+    operatorsAliases: false,
+    seederStorage: 'sequelize'
   },
   test: {
     username: process.env.CI_DB_USERNAME,
@@ -23,6 +24,7 @@ module.exports = {
     dialectOptions: {
         ssl:'Amazon RDS'
     },
-    operatorsAliases: false
+    operatorsAliases: false,
+    seederStorage: 'sequelize'
   }
 };
