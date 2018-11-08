@@ -7,7 +7,9 @@ import socket from 'socket.io';
 import http from 'http';
 import passportManager from './config/passport';
 import router from './routes';
+import Sentry from '@sentry/node';
 
+Sentry.init({ dsn: 'https://fe9b409c3cf948dabe47139d387bfb54@sentry.io/1318831' });
 
 const app = express();
 
@@ -17,6 +19,9 @@ const screen = io.of('/screen');
 
   
 // Middleware
+app.use(Sentry.Handlers.requestHandler());
+
+ 
 app.use(function(req, res, next){
   res.io = io;
   res.screen = screen;
@@ -34,6 +39,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/',router);
 
 app.use(passportManager.initialize());
+
+app.use(Sentry.Handlers.errorHandler());
 
 io.on('connection', (socket) => {
   console.log('a user connected');
