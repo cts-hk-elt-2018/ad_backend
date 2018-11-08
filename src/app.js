@@ -7,9 +7,9 @@ import socket from 'socket.io';
 import http from 'http';
 import passportManager from './config/passport';
 import router from './routes';
-import Sentry from '@sentry/node';
 
-Sentry.init({ dsn: 'https://fe9b409c3cf948dabe47139d387bfb54@sentry.io/1318831' });
+const Sentry = require('@sentry/node');
+
 
 const app = express();
 
@@ -17,7 +17,8 @@ const server = http.Server(app);
 const io = socket(server);
 const screen = io.of('/screen');
 
-  
+Sentry.init({ dsn: 'https://fe9b409c3cf948dabe47139d387bfb54@sentry.io/1318831' });
+
 // Middleware
 app.use(Sentry.Handlers.requestHandler());
 
