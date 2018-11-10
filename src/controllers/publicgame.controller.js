@@ -30,7 +30,7 @@ class publicGameController {
           } else {
             s3Client.upload(params, (err, data) => {
               if (err) {
-                return res.json({success: false, msg: 'Error'});
+                return res.status(500).send({success: false, msg: 'Error'});
               }
               models.GameResponse.create({
                 imageUrl: data.Location,
