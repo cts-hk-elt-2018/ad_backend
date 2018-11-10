@@ -6,6 +6,7 @@ import luckyDrawRouter from './luckydraw.route';
 import publicGameRouter from './publicgame.route';
 import gameRouter from './game.route';
 import publicCheckinRouter from './publiccheckin.route';
+import awardRouter from './award.route';
  
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/api/luckydraw', luckyDrawRouter);
 router.use('/api/public/game', publicGameRouter);
 router.use('/api/game', gameRouter);
 router.use('/api/public/checkin',publicCheckinRouter);
+router.use('/api/award', awardRouter);
  
 export default router;

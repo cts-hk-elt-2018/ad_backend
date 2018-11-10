@@ -22,6 +22,9 @@ class publicCheckinController {
               UserId: user.id,
               eventId: req.body.eventId
             }).then(user => {
+              if (user.isAwardee) {
+                //TODO: send notification
+              }
               return res.json({success: true, msg: 'User checked in.'});
             }).catch(err => {
               return res.json({success: false, msg: 'Error'});

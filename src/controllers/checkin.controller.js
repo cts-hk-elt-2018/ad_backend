@@ -85,6 +85,9 @@ class CheckinController {
                 UserId: user.id,
                 eventId: req.params.eventId
               }).then(user => {
+                if (user.isAwardee) {
+                  //TODO: send notification
+                }
                 return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName});
               }).catch(err => {
                 return res.json({success: false, msg: 'Error'});
