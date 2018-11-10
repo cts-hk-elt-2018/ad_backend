@@ -1,6 +1,6 @@
 import models from '../models';
 
-class CheckinController {
+class publicCheckinController {
   async checkin(req, res) {
     models.User.findOne({
       where: {
@@ -34,4 +34,4 @@ class CheckinController {
   }
 }
 
-export default new PublicCheckinController();
+export default new publicCheckinController();
