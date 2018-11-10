@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
     isWinner: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    isRegistered: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    isCheckedIn: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {});
   User.associate = (models) => {
