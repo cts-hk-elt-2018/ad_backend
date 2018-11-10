@@ -80,6 +80,7 @@ class CheckinController {
             }
           }).then(checkin => {
             if (!checkin) {
+              models.User.update({isCheckedIn: 1}, {where: {id: user.id}});
               models.Checkin.create({
                 UserId: user.id,
                 eventId: req.params.eventId
@@ -109,6 +110,7 @@ class CheckinController {
         if (!user) {
           return res.status(404).send({success: false, msg: 'User not found.'});
         } else {
+          models.User.update({isCheckedIn: 0}, {where: {id: user.id}});
           models.Checkin.destroy({
             where:{
               UserId: user.id,

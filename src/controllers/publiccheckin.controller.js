@@ -17,6 +17,7 @@ class publicCheckinController {
           }
         }).then(checkin => {
           if (!checkin) {
+            models.User.update({isCheckedIn: 1}, {where: {id: user.id}});
             models.Checkin.create({
               UserId: user.id,
               eventId: req.body.eventId
