@@ -11,6 +11,7 @@ class publicGameController {
     params.Key = Math.random().toString(36).substring(2, 15) + xss(req.file.originalname);
     params.Body = req.file.buffer;
     params.ACL = 'public-read';
+    params.ContentType = 'image/jpeg';
     models.Option.findOne({
       where: {
         key: 'currentPage'
@@ -32,7 +33,7 @@ class publicGameController {
                 return res.json({success: false, msg: 'Error'});
               }
               models.GameResponse.create({
-                imageUrl: data.location,
+                imageUrl: data.Location,
                 groupName: xss(req.body.groupName),
                 message: xss(req.body.message),
                 GameQuestionId: currentGameQuestionId.value,
