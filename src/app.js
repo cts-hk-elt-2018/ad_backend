@@ -21,11 +21,16 @@ Sentry.init({ dsn: 'https://fe9b409c3cf948dabe47139d387bfb54@sentry.io/1318831' 
 
 // Middleware
 app.use(Sentry.Handlers.requestHandler());
-
  
 app.use(function(req, res, next){
   res.io = io;
   res.screen = screen;
+  next();
+});
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
