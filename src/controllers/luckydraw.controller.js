@@ -54,7 +54,9 @@ class LuckyDrawController {
             order: models.sequelize.random(), 
             limit: req.body.winnerCount,
             where: {
-              isWinner: false
+              isWinner: false,
+              isRegistered: true,
+              isCheckedIn: true
             },
             attributes: ['id', 'username', 'firstName', 'lastName']
           }).then(winners => {
@@ -108,7 +110,9 @@ class LuckyDrawController {
             order: models.sequelize.random(),
             limit: req.body.removedWinnersId.length,
             where: {
-              isWinner: false
+              isWinner: false,
+              isRegistered: true,
+              isCheckedIn: true
             },
             attributes: ['id', 'username', 'firstName', 'lastName']
           }).then(winners => {
