@@ -4,7 +4,7 @@ import stream from 'stream';
 import moment from 'moment-timezone';
 import xss from 'xss';
 
-class publicGameController {
+class publicCheckinController {
   async upload(req, res) {
     const s3Client = s3.s3Client;
     const params = s3.uploadParams;
