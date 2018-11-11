@@ -45,7 +45,7 @@ class gameController {
       //Screen Display
       res.screen.emit('game_next_response', null);
 
-      return res.status(200).send({result:true});
+      return res.status(200).send({success: true});
     } else {
       return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }
@@ -57,7 +57,7 @@ class gameController {
       //Screen Display
       res.screen.emit('game_previous_response', null);
 
-      return res.status(200).send({result:true});
+      return res.status(200).send({success: true});
     } else {
       return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }
