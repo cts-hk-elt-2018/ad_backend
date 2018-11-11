@@ -85,7 +85,7 @@ class CheckinController {
               models.Checkin.create({
                 UserId: user.id,
                 eventId: req.params.eventId
-              }).then(user => {
+              }).then(checkin => {
                 if (user.isAwardee) {
                   // send notification
                   const snsClient = sns.snsClient;
@@ -113,6 +113,8 @@ class CheckinController {
                     }
                     return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
                   });
+                } else {
+                  return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
                 }
               }).catch(err => {
                 return res.json({success: false, msg: 'Error'});

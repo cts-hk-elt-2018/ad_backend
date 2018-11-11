@@ -22,7 +22,7 @@ class publicCheckinController {
             models.Checkin.create({
               UserId: user.id,
               eventId: req.body.eventId
-            }).then(user => {
+            }).then(checkin => {
               if (user.isAwardee) {
                 //send notification
                 const snsClient = sns.snsClient;
@@ -50,13 +50,15 @@ class publicCheckinController {
                   }
                   return res.json({success: true, msg: 'User checked in.', isAwardee: user.isAwardee});
                 });
+              } else {
+                return res.json({success: true, msg: 'User checked in.', isAwardee: user.isAwardee});
               }
               
             }).catch(err => {
               return res.json({success: false, msg: 'Error'});
             });
           } else {
-            return res.json({success: true, msg: 'User already checked in.'});
+            return res.json({success: true, msg: 'User already checked in.', isAwardee: user.isAwardee});
           }
         });
       }
