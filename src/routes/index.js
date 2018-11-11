@@ -8,6 +8,7 @@ import gameRouter from './game.route';
 import publicCheckinRouter from './publiccheckin.route';
 import awardRouter from './award.route';
 import soundRouter from './sound.route';
+import notificationRouter from './notification.route';
  
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/api/game', gameRouter);
 router.use('/api/public/checkin',publicCheckinRouter);
 router.use('/api/award', awardRouter);
 router.use('/api/sound', soundRouter);
+router.use('/api/notification', notification);
  
 export default router;

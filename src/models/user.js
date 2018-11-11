@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     isCheckedIn: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    endpointArn: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {});
   User.associate = (models) => {
