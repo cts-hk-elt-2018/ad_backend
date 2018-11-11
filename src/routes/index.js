@@ -21,6 +21,6 @@ router.use('/api/game', gameRouter);
 router.use('/api/public/checkin',publicCheckinRouter);
 router.use('/api/award', awardRouter);
 router.use('/api/sound', soundRouter);
-router.use('/api/notification', notification);
+router.use('/api/notification', notificationRouter);
  
 export default router;
