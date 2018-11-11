@@ -148,9 +148,9 @@ class CheckinController {
             }
           }).then(checkin => {
             if (!checkin) {
-              return res.json({success: false, msg: 'Checked in not existed.', username: user.username, name: user.lastName + ', ' + user.firstName});
+              return res.json({success: false, msg: 'Checked in not existed.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
             } else {
-              return res.json({success: true, msg: 'Checkin deleted.', username: user.username, name: user.lastName + ', ' + user.firstName});
+              return res.json({success: true, msg: 'Checkin deleted.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
             }
           });        
         }
