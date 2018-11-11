@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    isAwardee: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     endpointArn: {
       type: DataTypes.STRING,
       allowNull: false
