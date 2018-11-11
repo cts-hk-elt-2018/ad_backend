@@ -1,3 +1,5 @@
+import models from '../models';
+
 class pageController {
 
   // List out all pages

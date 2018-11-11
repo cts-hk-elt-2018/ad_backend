@@ -1,5 +1,7 @@
+import models from '../models';
+
 class soundController {
-  
+
   // List out all sounds
   async index(req, res) {
     if (req.user && req.user.username && (req.user.role == 3)) {  
