@@ -12,6 +12,21 @@ class awardController {
     }
   }
 
+  // List out all awardees
+  async listAwardee(req, res) {
+    if (req.user && req.user.username && (req.user.role == 3)) {  
+      models.Awardee.findAll({
+        include: [{
+          model: models.User
+        }]
+      }).then(result => {
+        return res.json({success: true, result: result});
+      });
+    } else {
+      return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    }
+  }
+
   // Show award onto the screen
   async show(req, res) {
     if (req.user && req.user.username && (req.user.role == 3)) {
