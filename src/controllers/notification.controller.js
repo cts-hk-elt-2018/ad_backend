@@ -16,6 +16,7 @@ class notificationController {
 
       snsClient.createPlatformEndpoint(devParams, (err, data) => {
         if (err) {
+          console.log(err);
           return res.status(500).send({success: false, msg: 'Error'});
         } else {
           const subscribeParams = sns.subscribeParams;
@@ -23,28 +24,26 @@ class notificationController {
           snsClient.subscribe(subscribeParams, (err, data) => {
             if (err) {
               return res.status(500).send({success: false, msg: 'Error'});
+            } else {
+              snsClient.createPlatformEndpoint(prodParams, (err, data) => {
+                if (err) {
+                  return res.status(500).send({success: false, msg: 'Error'});
+                } else {
+                  const subscribeParams = sns.subscribeParams;
+                  subscribeParams.Endpoint = data.EndpointArn;
+                  models.User.update({endpointArn: data.EndpointArn}, {where: {id: req.user.id}});
+                  snsClient.subscribe(subscribeParams, (err, data) => {
+                    if (err) {
+                      return res.status(500).send({success: false, msg: 'Error'});
+                    }
+                    return res.status(200).send({success: true});
+                  });
+                }
+              });
             }
           });
         }
       });
-
-      snsClient.createPlatformEndpoint(prodParams, (err, data) => {
-        if (err) {
-          return res.status(500).send({success: false, msg: 'Error'});
-        } else {
-          const subscribeParams = sns.subscribeParams;
-          subscribeParams.Endpoint = data.EndpointArn;
-          models.User.update({endpointArn: data.EndpointArn}, {where: {id: req.user.id}});
-          snsClient.subscribe(subscribeParams, (err, data) => {
-            if (err) {
-              return res.status(500).send({success: false, msg: 'Error'});
-            }
-          });
-        }
-      });
-
-      return res.status(200).send({success: true});
-
     } else {
       return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }

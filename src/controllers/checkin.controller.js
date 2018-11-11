@@ -87,7 +87,7 @@ class CheckinController {
                 eventId: req.params.eventId
               }).then(user => {
                 if (user.isAwardee) {
-                  //TODO: send notification
+                  // send notification
                   const snsClient = sns.snsClient;
                   const params = sns.publishParams;
 
@@ -111,9 +111,9 @@ class CheckinController {
                     if (err) {
                       return res.status(500).send({success: false, msg: 'Error'});
                     }
+                    return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
                   });
                 }
-                return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
               }).catch(err => {
                 return res.json({success: false, msg: 'Error'});
               });
