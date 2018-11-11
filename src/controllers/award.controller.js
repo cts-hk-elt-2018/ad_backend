@@ -17,7 +17,7 @@ class awardController {
     if (req.user && req.user.username && (req.user.role == 3)) {  
       models.Awardee.findAll({
         include: [{
-          model: models.User, models.Award
+          model: [models.User, models.Award]
         }]
       }).then(result => {
         return res.json({success: true, result: result});
