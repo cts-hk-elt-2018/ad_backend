@@ -4,7 +4,7 @@ import passportManager from '../config/passport';
 
 const router = express.Router();
 
-router.get('/', passportManager.authenticate, pageController.list);
+router.get('/', passportManager.authenticate, pageController.index);
 router.get('/:pageName', passportManager.authenticate, pageController.show);
  
 export default router;
