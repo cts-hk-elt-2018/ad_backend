@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const LuckyDrawGift = sequelize.define('LuckyDrawGift', {
     name: DataTypes.STRING,
-    imageUrl: DataTypes.STRING
+    imageUrl: DataTypes.STRING,
+    price: DataTypes.STRING
   }, {});
   LuckyDrawGift.associate = function(models) {
     // associations can be defined here
