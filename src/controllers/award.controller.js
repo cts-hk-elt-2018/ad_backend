@@ -33,7 +33,7 @@ class awardController {
     if (req.user && req.user.username && (req.user.role == 3)) {
       models.Award.findOne({
         where: {
-          id: req.params.questionId
+          id: req.params.awardId
         }
       }).then(award => {
         if (!award) {
