@@ -52,7 +52,7 @@ class awardController {
               model: models.User
             }],
             where: {
-              eventId: req.params.eventId
+              awardId: req.params.awardId
             }
           }).then(result => {
             return res.json({success: true, result: result});
