@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     displayName: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
     price: DataTypes.STRING,
-    drawed: DataTypes.BOOLEAN
+    drawed: DataTypes.BOOLEAN,
+    winnerLen: DataTypes.INTEGER
   }, {});
   LuckyDrawGift.associate = function(models) {
     // associations can be defined here
