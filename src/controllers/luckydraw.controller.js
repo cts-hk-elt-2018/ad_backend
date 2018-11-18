@@ -68,7 +68,7 @@ class LuckyDrawController {
               });
               models.User.update({isWinner: 1}, {where: {id: winner.id}});
             });
-
+            models.LuckyDrawGift.update({drawed: 1}, {where: {id: gift.id}});
             //Screen Display
             res.screen.emit('current_page', 'lucky_draw');
             models.Option.update({value: 'lucky_draw'}, {where: {key: 'currentPage'}});
