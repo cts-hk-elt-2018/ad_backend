@@ -30,6 +30,7 @@ class gameController {
           res.screen.emit('game_current_question', question);
           models.Option.update({value: question.id}, {where: {key: 'currentGameQuestionId'}});
           res.screen.emit('game_empty_responses', null);
+          models.GameQuestion.update({played: 1}, {where: {id: question.id}});
 
           return res.status(200).send({success:true});
         }
