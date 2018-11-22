@@ -72,7 +72,32 @@ class CheckinController {
         }
       }).then(user => {
         if (!user) {
-          return res.status(404).send({success: false, msg: 'User not found.'});
+          const snsClient = sns.snsClient;
+          const params = sns.publishParams;
+
+          var msg = 'Staff with ID ' + req.user.username + ' is not found.';
+          var payload = {
+            default: msg,
+            APNS: {
+              aps: {
+                alert: msg,
+                sound: 'default'
+              }
+            }
+          };
+
+          payload.APNS = JSON.stringify(payload.APNS);
+          payload = JSON.stringify(payload);
+
+          params.Message = payload;
+
+          snsClient.publish(params, (err, data) => {
+            if (err) {
+              return res.status(500).send({success: false, msg: 'Error'});
+            }
+            return res.status(404).send({success: false, msg: 'User not found.'});
+          });
+          
         } else {
           models.Checkin.findOne({
             where:{
@@ -106,6 +131,8 @@ class CheckinController {
                   payload = JSON.stringify(payload);
 
                   params.Message = payload;
+                  params.TargetArn = 'arn:aws:sns:ap-southeast-1:761289314841:endpoint/APNS_SANDBOX/ad_ios_dev/cd4409d0-767a-3e92-8f15-573c34fa2919';
+                  params.TopicArn = undefined;
 
                   snsClient.publish(params, (err, data) => {
                     if (err) {
