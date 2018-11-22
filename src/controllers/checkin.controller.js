@@ -181,7 +181,33 @@ class CheckinController {
                 return res.json({success: false, msg: 'Error'});
               });
             } else {
-              return res.json({success: true, msg: 'User already checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+              // send notification
+              const snsClient = sns.snsClient;
+              const params = sns.publishParams;
+
+              var msg = 'Associate ' + user.firstName + ' ' + user.lastName + ' (' + user.username + ') should have already checked in.';
+              var payload = {
+                default: msg,
+                APNS: {
+                  aps: {
+                    alert: msg,
+                    sound: 'default'
+                  }
+                }
+              };
+
+              payload.APNS = JSON.stringify(payload.APNS);
+              payload = JSON.stringify(payload);
+
+              params.Message = payload;
+              params.TopicArn = req.user.endpointArn;
+
+              snsClient.publish(params, (err, data) => {
+                if (err) {
+                  return res.status(500).send({success: false, msg: 'Error'});
+                }
+                return res.json({success: true, msg: 'User already checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+              });
             }
           });
         }
