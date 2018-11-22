@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    upgrade: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     endpointArn: {
       type: DataTypes.STRING,
       allowNull: false

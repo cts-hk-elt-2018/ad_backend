@@ -111,10 +111,71 @@ class CheckinController {
                     if (err) {
                       return res.status(500).send({success: false, msg: 'Error'});
                     }
-                    return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+
+                    if (user.upgrade) {
+                      // send notification
+                      const snsClient = sns.snsClient;
+                      const params = sns.publishParams;
+
+                      var msg = 'Associate ' + user.firstName + ' ' + user.lastName + ' (' + user.username + ') has been upgraded, please give him/her the upgrade voucher.';
+                      var payload = {
+                        default: msg,
+                        APNS: {
+                          aps: {
+                            alert: msg,
+                            sound: 'default'
+                          }
+                        }
+                      };
+
+                      payload.APNS = JSON.stringify(payload.APNS);
+                      payload = JSON.stringify(payload);
+
+                      params.Message = payload;
+                      params.TopicArn = req.user.endpointArn;
+
+                      snsClient.publish(params, (err, data) => {
+                        if (err) {
+                          return res.status(500).send({success: false, msg: 'Error'});
+                        }
+                        return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+                      });
+                    } else {
+                      return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+                    }
                   });
                 } else {
-                  return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+                  if (user.upgrade) {
+                    // send notification
+                    const snsClient = sns.snsClient;
+                    const params = sns.publishParams;
+
+                    var msg = 'Associate ' + user.firstName + ' ' + user.lastName + ' (' + user.username + ') has been upgraded, please give him/her the upgrade voucher.';
+                    var payload = {
+                      default: msg,
+                      APNS: {
+                        aps: {
+                          alert: msg,
+                          sound: 'default'
+                        }
+                      }
+                    };
+
+                    payload.APNS = JSON.stringify(payload.APNS);
+                    payload = JSON.stringify(payload);
+
+                    params.Message = payload;
+                    params.TopicArn = req.user.endpointArn;
+
+                    snsClient.publish(params, (err, data) => {
+                      if (err) {
+                        return res.status(500).send({success: false, msg: 'Error'});
+                      }
+                      return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+                    });
+                  } else {
+                    return res.json({success: true, msg: 'User checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
+                  }
                 }
               }).catch(err => {
                 return res.json({success: false, msg: 'Error'});
