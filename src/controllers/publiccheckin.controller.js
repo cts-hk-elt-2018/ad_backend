@@ -48,10 +48,10 @@ class publicCheckinController {
                   if (err) {
                     return res.status(500).send({success: false, msg: 'Error'});
                   }
-                  return res.json({success: true, msg: 'User checked in.', isAwardee: user.isAwardee});
+                  return res.json({success: true, msg: 'User checked in.', upgraded: user.upgrade});
                 });
               } else {
-                return res.json({success: true, msg: 'User checked in.', isAwardee: user.isAwardee});
+                return res.json({success: true, msg: 'User checked in.', upgraded: user.upgrade});
               }
               
             }).catch(err => {
