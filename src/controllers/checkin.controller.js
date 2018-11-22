@@ -132,7 +132,8 @@ class CheckinController {
                       payload = JSON.stringify(payload);
 
                       params.Message = payload;
-                      params.TopicArn = req.user.endpointArn;
+                      params.TargetArn = req.user.endpointArn;
+                      params.TopicArn = undefined;
 
                       snsClient.publish(params, (err, data) => {
                         if (err) {
@@ -165,7 +166,8 @@ class CheckinController {
                     payload = JSON.stringify(payload);
 
                     params.Message = payload;
-                    params.TopicArn = req.user.endpointArn;
+                    params.TargetArn = req.user.endpointArn;
+                    params.TopicArn = undefined;
 
                     snsClient.publish(params, (err, data) => {
                       if (err) {
@@ -200,10 +202,12 @@ class CheckinController {
               payload = JSON.stringify(payload);
 
               params.Message = payload;
-              params.TopicArn = req.user.endpointArn;
+              params.TargetArn = req.user.endpointArn;
+              params.TopicArn = undefined;
 
               snsClient.publish(params, (err, data) => {
                 if (err) {
+                  console.log(err);
                   return res.status(500).send({success: false, msg: 'Error'});
                 }
                 return res.json({success: true, msg: 'User already checked in.', username: user.username, name: user.lastName + ', ' + user.firstName, isAwardee: user.isAwardee});
